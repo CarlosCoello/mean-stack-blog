@@ -22,9 +22,7 @@ mongoose.connect( config.uri, ( err ) => {
 });
 
 // Middleware
-app.use( cors({
-  origin: 'https://eerie-alien-86151.herokuapp.com/'
-}));
+app.use( cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use( express.static(__dirname + '/dist') );
