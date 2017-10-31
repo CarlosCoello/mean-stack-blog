@@ -32,9 +32,9 @@ app.use( '/authentication', authentication );
 app.use( '/blogs', blogs );
 
 // Connect server to Angular 2 Index.html
-// app.get( '/*', ( req, res ) => {
-//   res.sendFile( path.join(__dirname + '/dist/index.html' ) );
-// });
+app.get( '/*', ( req, res ) => {
+  res.sendFile( path.join(__dirname + '/dist/index.html' ) );
+});
 
 app.listen( port, () => {
   console.log( 'Listening on port' + port );
