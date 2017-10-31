@@ -1,0 +1,10 @@
+<div class="jumbotron text-center">
+  <h1>MEAN Stack Application</h1>
+  <p class="lead">Welcome to the MEAN Stack Application</p>
+  <div>
+      <a *ngIf="!authService.loggedIn()" routerLink="/register" class="btn btn-success">Register</a>
+      <a *ngIf="!authService.loggedIn()" routerLink="/login" class="btn btn-primary">Login</a>
+      <a *ngIf="authService.loggedIn()" class="btn btn-primary" (click)="onLogOutClick()">LogOut</a>
+      <a *ngIf="authService.loggedIn()" class="btn btn-default" routerLink="/blog">View Blogs</a>
+  </div>
+</div>

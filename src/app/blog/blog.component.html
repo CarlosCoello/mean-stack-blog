@@ -1,0 +1,117 @@
+<h1 class="page-header">Blog Feed</h1>
+
+<div class="row show-hide-message" *ngIf="showMessage">
+  <div [ngClass]="messageClass">
+  {{ message }}
+  </div>
+</div>
+
+<button type="button" name="button" class="btn btn-primary" *ngIf="!newPost" (click)="newBlogForm()">New Post</button>
+<button [disabled]="loadingBlogs" type="button" name="button" class="btn btn-default" *ngIf="!newPost" (click)="reloadBlogs()"><span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;Reload</button>
+
+<br />
+<br />
+
+<!-- Form -->
+<form [formGroup]="form" name="blogForm" (submit)="onBlogSubmit()" *ngIf="newPost">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <div [ngClass]="{ 'has-success': form.controls.title.valid, 'has-error': (form.controls.title.dirty && form.controls.title.errors) }">
+      <input type="text" name="title" class="form-control" placeholder="Type Title" autocomplete="off" formControlName="title">
+    <ul class="help-black">
+      <li *ngIf="(form.controls.title.dirty && form.controls.title.errors?.required)">This field is required</li>
+      <li *ngIf="( form.controls.title.dirty && form.controls.title.errors?.minlength ) || ( form.controls.title.dirty && form.controls.title.errors?.maxlength )">This field must be at least 5 characters short and 30 characters long</li>
+      <li *ngIf="(form.controls.title.dirty && form.controls.title.errors?.alphaNumericValidation)">Must be a letter or number or a dash or underscore</li>
+    </ul>
+    </div>
+  </div><!-- .form-group -->
+  <div class="form-group">
+    <label for="body">Body</label>
+    <div [ngClass]="{ 'has-success': form.controls.body.valid, 'has-error': form.controls.body.dirty && form.controls.body.errors }">
+      <textarea name="body" rows="8" cols="80" class="form-control" placeholder="Type Body" formControlName="body"></textarea>
+      <ul class="help-black">
+        <li *ngIf="form.controls.body.dirty && form.controls.body.errors?.required">This field is required</li>
+        <li *ngIf="( form.controls.body.dirty && form.controls.body.errors?.minlength ) || ( form.controls.body.dirty && form.controls.body.errors?.maxlength )">This field must be at least 5 characters short and 200 characters long</li>
+      </ul>
+    </div>
+  </div><!-- .form-group -->
+<button [disabled]="processing" type="button" name="button" class="btn btn-warning" (click)="goBack()">Go Back</button>
+<button [disabled]="processing || !form.valid" type="submit" name="button" class="btn btn-success">Submit</button>
+
+</form>
+<!-- Form -->
+
+<div *ngIf="!newPost">
+  <div class="panel panel-default" *ngFor="let blog of blogPosts">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ blog.title }}</h3>
+    </div>
+      <div class="panel-body" style="word-wrap:break-word;">
+        {{ blog.body }}
+      </div>
+      <div class="panel-footer">
+        <p><strong>Posted by: </strong>{{ blog.createdBy }}</p>
+        <p><strong>Date: </strong>{{ blog.createdAt | date:'MMM dd, yyyy' }}</p>
+        <div class="like-dislike" *ngIf="username === blog.createdBy">
+          <p><strong>Likes: </strong>{{ blog.likes }}</p>
+          <p><strong>Dislikes: </strong>{{ blog.dislikes }}</p>
+        </div>
+        <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy"><button type="button" name="button" class="btn btn-sm btn-info">Edit</button></a>
+      <a [routerLink]="['/delete-blog', blog._id]" *ngIf="username === blog.createdBy"><button type="button" name="button" class="btn btn-sm btn-danger">Delete</button></a>
+        <div class="dropdown">
+          <button type="button" name="button" class="btn btn-sm btn-success" *ngIf="username !== blog.createdBy" (click)="likeBlog(blog._id)" [disabled]="blog.likedBy.indexOf(username) > -1">
+            <span class="glyphicon glyphicon-thumbs-up">&nbsp;</span>Likes: {{ blog.likes }}
+          </button>
+          <div class="dropdown-content">
+              <a [routerLink]="['/user/', like]" *ngFor="let like of blog.likedBy">{{ like }}</a>
+          </div>
+        </div><!-- .dropdown likes -->
+        <div class="dropdown">
+          <button type="button" name="button" class="btn btn-sm btn-warning" *ngIf="username !== blog.createdBy" (click)="dislikeBlog(blog._id)" [disabled]="blog.dislikedBy.indexOf(username) > -1">
+            <span class="glyphicon glyphicon-thumbs-down">&nbsp;</span>Dislikes: {{ blog.dislikes }}
+          </button>
+          <div class="dropdown-content">
+            <a [routerLink]="['/user/', dislike]" *ngFor="let dislike of blog.dislikedBy">{{ dislike }}</a>
+          </div>
+        </div><!-- .dropdown dislikes -->
+      </div><!-- .panel-footer -->
+      <ul class="list-group">
+        <li class="list-group-item" *ngIf="username !== blog.createdBy">
+          <button type="button" name="button" class="btn btn-sm btn-danger" (click)="draftComment(blog._id)">Post Comment</button>
+          <br />
+          <div *ngIf="newComment.indexOf(blog._id) > -1">
+            <form [formGroup]="commentForm">
+              <div [ngClass]="{'has-success': !commentForm.controls.comment.errors && commentForm.controls.comment.dirty, 'has-error': commentForm.controls.comment.dirty && commentForm.controls.comment.errors}">
+              <textarea name="comment" rows="10" cols="30" class="form-control" formControlName="comment"></textarea>
+              <ul class="help-block">
+                <li *ngIf="commentForm.controls.comment.errors?.required && commentForm.controls.comment.dirty">This field is required.</li>
+                <li *ngIf="(commentForm.controls.comment.errors?.maxlength && commentForm.controls.comment.dirty) ||(commentForm.controls.comment.errors?.minlength && commentForm.controls.comment.dirty)">Comment must be at least 1 character but no more than 200.</li>
+              </ul>
+            </div>
+              <button type="submit" name="button"  class="btn btn-sm btn-info" (click)="saveComment(blog._id)">Submit Comment</button>
+              <button type="button" name="button" class="btn btn-sm btn-danger" (click)="cancelComment(blog._id)">Cancel Comment</button>
+            </form>
+          </div>
+        </li>
+        <li *ngIf="enableComments.indexOf(blog._id) === -1 && blog.comments.length > 0" class="list-group-item">
+          <span (click)="expand(blog._id)">
+            Show comments&nbsp;&nbsp;
+            <div class="glyphicon glyphicon-comment"></div>
+          </span>
+        </li>
+        <li *ngIf="enableComments.indexOf(blog._id) > -1" class="list-group-item">
+          <span (click)="collapse(blog._id)">
+            Hide Comments&nbsp;&nbsp;
+            <div class="glyphicon glyphicon-comment"></div>
+          </span>
+        </li>
+        <div *ngIf="enableComments.indexOf(blog._id) > -1">
+          <li *ngFor="let comment of blog.comments" class="list-group-item">
+            <strong>{{ comment.createdBy }}:</strong> {{ comment.comment }}
+          </li>
+        </div>
+      </ul><!-- .list-group -->
+  </div><!-- .panel -->
+</div>
+<br />
+<br />

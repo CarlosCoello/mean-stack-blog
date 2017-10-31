@@ -1,0 +1,8 @@
+footer {
+    background: #111;
+}
+
+footer .footer {
+    padding: 100px 50px;
+    color: #fff;
+}
