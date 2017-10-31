@@ -27,14 +27,13 @@ app.use( cors({
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use( express.static(__dirname + 'dist/') );
+app.use( express.static(__dirname + '/dist') );
 app.use( '/authentication', authentication );
 app.use( '/blogs', blogs );
 
 // Connect server to Angular 2 Index.html
-app.get( '*', ( req, res ) => {
-  //res.sendFile( path.join(__dirname + '/client/dist/index.html' ) );
-  res.send('<h1>Carlos</h1>');
+app.get( '/*', ( req, res ) => {
+  res.sendFile( path.join(__dirname + '/dist/index.html' ) );
 });
 
 app.listen( port, () => {
