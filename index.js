@@ -23,7 +23,7 @@ mongoose.connect( config.uri, ( err ) => {
 
 // Middleware
 app.use( cors({
-  origin: 'http://localhost:4200'
+  origin: 'https://eerie-alien-86151.herokuapp.com/'
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
