@@ -42,14 +42,14 @@
 <!-- Form -->
 
 <div *ngIf="!newPost">
-  <div class="panel panel-default" *ngFor="let blog of blogPosts">
-    <div class="panel-heading">
-        <h3 class="panel-title">{{ blog.title }}</h3>
+  <div class="card" *ngFor="let blog of blogPosts">
+    <div class="card-header">
+        <h3 class="card-title">{{ blog.title }}</h3>
     </div>
-      <div class="panel-body" style="word-wrap:break-word;">
+      <div class="card-body" style="word-wrap:break-word;">
         {{ blog.body }}
       </div>
-      <div class="panel-footer">
+      <div class="card-footer">
         <p><strong>Posted by: </strong>{{ blog.createdBy }}</p>
         <p><strong>Date: </strong>{{ blog.createdAt | date:'MMM dd, yyyy' }}</p>
         <div class="like-dislike" *ngIf="username === blog.createdBy">
