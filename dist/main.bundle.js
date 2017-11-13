@@ -495,7 +495,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "div#navbarSupportedContent .collapse .navbar-collapse {\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}", ""]);
+exports.push([module.i, ".collapse .navbar-collapse {\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}", ""]);
 
 // exports
 
