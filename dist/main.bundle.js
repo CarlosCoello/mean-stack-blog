@@ -495,7 +495,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, ".collapse .navbar-collapse {\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}", ""]);
+exports.push([module.i, ".navbar-collapse .collapse {\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n}\n\n@media only screen and (max-width: 992px){\n    .navbar-collapse .collapse {\n        -webkit-box-pack: start;\n            -ms-flex-pack: start;\n                justify-content: flex-start;\n    }\n}\n", ""]);
 
 // exports
 
