@@ -184,7 +184,7 @@ enableComments = [];
 
   ngOnInit() {
     this.authService.getProfile().subscribe( profile => {
-      this.username = profile.user.username;
+      this.username = profile.username;
     });
     this.getAllBlogs();
   }
