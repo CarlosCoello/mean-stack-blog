@@ -6,14 +6,15 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="nav navbar-nav float-left">
-      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/">Home</a></li>
+      <li class="mx-2" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/">Home</a></li>
     </ul>
     <ul class="nav navbar-nav float-right">
-      <li *ngIf="authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/profile">Profile</a></li>
-      <li *ngIf="authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/blog">Blog</a></li>
-      <li *ngIf="!authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/login">Login</a></li>
-      <li *ngIf="authService.loggedIn()"><a href="#" (click)="onLogOutClick()">Logout</a></li>
-      <li *ngIf="!authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/register">Register</a></li>
+      <li class="mx-2" *ngIf="authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/profile">Profile</a></li>
+      <li class="mx-2" *ngIf="authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/blog">Blog</a></li>
+      <li class="mx-2" *ngIf="!authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/login">Login</a></li>
+      <li class="mx-2" *ngIf="authService.loggedIn()"><a href="#" (click)="onLogOutClick()">Logout</a></li>
+      <li class="mx-2" *ngIf="!authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/register">Register</a></li>
     </ul>
   </div>
 </nav>
+<br />
