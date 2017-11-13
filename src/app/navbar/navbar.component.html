@@ -1,20 +1,22 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" [routerLink]="['/']">Blog Theme</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['/']">Blog Theme</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="nav navbar-nav float-left">
-      <li class="mx-2" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/">Home</a></li>
-    </ul>
-    <ul class="nav navbar-nav float-right">
-      <li class="mx-2" *ngIf="authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/profile">Profile</a></li>
-      <li class="mx-2" *ngIf="authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/blog">Blog</a></li>
-      <li class="mx-2" *ngIf="!authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/login">Login</a></li>
-      <li class="mx-2" *ngIf="authService.loggedIn()"><a href="#" (click)="onLogOutClick()">Logout</a></li>
-      <li class="mx-2" *ngIf="!authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/register">Register</a></li>
-    </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="nav navbar-nav float-left">
+        <li class="mx-2" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/">Home</a></li>
+      </ul>
+      <ul class="nav navbar-nav float-right">
+        <li class="mx-2" *ngIf="authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/profile">Profile</a></li>
+        <li class="mx-2" *ngIf="authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/blog">Blog</a></li>
+        <li class="mx-2" *ngIf="!authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/login">Login</a></li>
+        <li class="mx-2" *ngIf="authService.loggedIn()"><a href="#" (click)="onLogOutClick()">Logout</a></li>
+        <li class="mx-2" *ngIf="!authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/register">Register</a></li>
+      </ul>
+    </div>
   </div>
 </nav>
 <br />
