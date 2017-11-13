@@ -6,10 +6,10 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="nav navbar-nav float-left">
+      <ul class="nav navbar-nav">
         <li class="mx-2" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/">Home</a></li>
       </ul>
-      <ul class="nav navbar-nav float-right">
+      <ul class="nav navbar-nav">
         <li class="mx-2" *ngIf="authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/profile">Profile</a></li>
         <li class="mx-2" *ngIf="authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/blog">Blog</a></li>
         <li class="mx-2" *ngIf="!authService.loggedIn()" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/login">Login</a></li>
